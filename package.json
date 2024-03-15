@@ -1,0 +1,14 @@
+{
+  "name": "craft-demo",
+  "version": "1.0.0",
+  "description": "Vasil Georgiev - Craft Demo ",
+  "scripts": {
+    "compile": "sass --watch src/_scss/main.scss src/css/style.css"
+  },
+  "author": "Vasil Georgiev",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "sass": "^1.72.0"
+  }
+}

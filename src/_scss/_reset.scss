@@ -1,0 +1,16 @@
+// VERY BASIC RESET
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+img, picture, video, canvas, svg {
+    max-width: 100%;
+}
+
+a, 
+a:visited,
+a:active,
+a:hover{
+    text-decoration: none;
+    color: inherit;
+}

@@ -1,0 +1,230 @@
+// Import colors from ingredients
+@use "reset";
+@use "ingredients";
+
+// I was not shure if I should use Bootstrap or not, so I implemented the both ways
+// Without Bootstrap use grid
+// @use "grid";
+
+// With Bootstrap
+// Import whole Bootstrap
+// @import "../../node_modules/bootstrap/scss/bootstrap";
+
+// OR Import only Bootstrap grid (with its dependencies 
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/maps";
+@import "../../node_modules/bootstrap/scss/mixins";
+@import "../../node_modules/bootstrap/scss/containers";
+@import "../../node_modules/bootstrap/scss/grid";
+
+// Import Font
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: ingredients.$black;
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: ingredients.$black;
+    font-weight:600;
+    text-align: center;
+    margin:45px 0 15px 0;
+}
+
+p.info {
+    text-align:center;
+    margin-bottom:45px;
+}
+
+// Making the button reusable
+@mixin button {
+    display: inline-flex;
+    margin:15px; // 30px (15+15) of space between the body text and the Link
+    padding:8px 15px;
+    font-weight:bold;
+    color: ingredients.$black;
+    transition:all 0.3s ease;
+}
+
+.card{
+    // When cards wrap to the next row, there should be 30px of space between the bottom of one row and the top of the next.
+    margin-bottom: 30px;
+    border:none; // if we import whole bootstrap it will add border to a card element
+
+    // 1px solid border in color Dune
+    // Text color should be Black
+    // Text size should be 16px
+    &__container{
+        border: 1px solid ingredients.$dune;
+        color: ingredients.$black;
+        font-size: 16px;
+        height: 100%;
+
+        // display the button at the bottom of the container
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    // Images should be 250px high with the entire space filled in with the image
+    &__image{
+        width:100%;
+        height:250px;
+        object-fit: cover;
+    }
+
+    // 15 px of space around the banner text
+    &__banner{
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        padding:15px;
+        font-weight:bold;
+        font-size: 18px;
+
+        // Category “Natural”: Asparagus background color with Black text
+        &--natural{
+            background-color: ingredients.$asparagus;
+        }
+        
+        // Category “Historical”: Carrot background color with Black text
+        &--historical{
+            background-color: ingredients.$carrot;
+        }
+        
+        // Category “monument”: Elm background color with White text
+        &--monument{
+            background-color: ingredients.$elm;
+            color: ingredients.$white;
+        }
+    }
+    // Text should be 24px on desktop, 18px on mobile, and bold
+    @media (min-width: 768px) {
+        .card__banner {
+            font-size: 24px;    
+        }
+    }
+
+    // Text should be 36px on desktop, 24px on mobile, and bold
+    // There should be 15px of space around the title
+    &__title{
+        font-size: 24px;
+        font-weight:bold;
+        padding:15px;
+        line-height: 1;
+
+        // Category “Natural”: Asparagus background color with Black text
+        &--natural{
+            color: ingredients.$asparagus;
+        }
+        
+        // Category “Historical”: Carrot background color with Black text
+        &--historical{
+            color: ingredients.$carrot;
+        }
+        
+        // Category “monument”: Elm background color with White text
+        &--monument{
+            color: ingredients.$elm;
+        }
+    }
+
+    @media (min-width: 768px){
+        .card__title {
+            font-size: 36px;    
+        }
+    }
+
+    // There should be 30px of space between the body text and the Link, but 15px everywhere else
+    &__body{
+        padding:15px
+    }
+
+    // There should be 30px of space between the body text and the Link, but 15px everywhere else
+    // There should be 8px of space for the button top and bottom and 15px left and right
+    // Button background color should match the banner background and text color
+    // The entire button should be clickable
+    // Text should be bold
+
+    // Asparagus should hover to Elm. The text color should change from Black to White.
+    // Carrot should hover to Geraldine.
+    // Elm should hover to Asparagus. The text color should change from White to Black.
+
+    &__link{
+        @include button;
+
+        &--natural{
+            background-color: ingredients.$asparagus;
+
+            &:hover{
+                background-color: ingredients.$elm;
+                color: ingredients.$white;
+            }
+        }
+    
+        &--historical{
+            background-color: ingredients.$carrot;
+
+            &:hover{
+                background-color: ingredients.$geraldine;
+            }
+        }
+    
+        &--monument{
+            background-color: ingredients.$elm;
+            color: ingredients.$white;
+
+            &:hover{
+                background-color: ingredients.$asparagus;
+                color: ingredients.$black;
+            }
+        }
+
+    }
+
+    // Add a class to feature a card in the row. The featured card will appear first in the card list and have:
+    // The background color of the card will be Elm with White text.
+    // A button background color of Chrome with Black text.
+
+    // If you are doing the featured card stretch goal as well, the featured card button color should hover to Picton Blue. The text color should stay black.
+
+    &.featured{
+
+        order: -1;
+
+        & .card__container{
+            background-color: ingredients.$elm;
+            color: ingredients.$white;
+            
+            & .card__title{
+                color: ingredients.$white;
+            }
+
+            & .card__link{
+                background-color: ingredients.$chrome;
+                color: ingredients.$black;
+
+                &:hover{
+                    background-color: ingredients.$picton-blue;
+                }
+            }
+        }
+    }
+
+}
+
+//There should always be at least 15px of space between the edges of the cards and the edge of the browser window.
+@media (max-width: 768px){
+    .container {
+        padding: 15px;    
+    }
+}
+
